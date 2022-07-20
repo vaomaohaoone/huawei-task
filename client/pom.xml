@@ -57,7 +57,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>org.huawei.server.ServerApp</mainClass>
+                            <mainClass>org.huawei.client.ClientApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

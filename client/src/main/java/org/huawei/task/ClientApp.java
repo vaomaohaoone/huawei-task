@@ -2,7 +2,6 @@ package org.huawei.task;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -10,7 +9,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.huawei.task.network.ClientHandler;
 import org.huawei.task.network.ClientInitializer;
 import org.huawei.task.service.ByeListener;
-import org.huawei.task.service.ClientHandlerFactory;
+import org.huawei.task.service.ClientAppHelper;
 import org.huawei.task.service.ConsoleService;
 
 import java.util.ArrayList;
@@ -37,12 +36,12 @@ public class ClientApp {
             channels.add(c);
             handlers.add(c.pipeline().get(ClientHandler.class));
         }
-        ClientHandlerFactory handlerFactory = new ClientHandlerFactory(handlers, channels);
+        ClientAppHelper clientAppHelper = new ClientAppHelper(handlers, channels);
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(
-                new ByeListener(handlerFactory, group),
+                new ByeListener(clientAppHelper, group),
                 0, 100, TimeUnit.MILLISECONDS
         );
-        var consoleService = new ConsoleService(handlerFactory);
+        var consoleService = new ConsoleService(clientAppHelper);
         consoleService.runConsole();
     }
 

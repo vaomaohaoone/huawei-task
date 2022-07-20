@@ -8,9 +8,12 @@ import org.huawei.task.network.ClientHandler;
 
 import java.util.List;
 
+/**
+ * Holds handlers and channels, stores a QUIT event flag
+ * */
 @RequiredArgsConstructor
 @Getter
-public class ClientHandlerFactory {
+public class ClientAppHelper {
     private final List<ClientHandler> handlers;
     private final List<Channel> channels;
     @Setter

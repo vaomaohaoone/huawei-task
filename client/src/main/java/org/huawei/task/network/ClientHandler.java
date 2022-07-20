@@ -26,9 +26,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Object> {
                 .key(kv.getKey())
                 .value(kv.getValue())
                 .build();
-        // Send request
         channel.writeAndFlush(req);
-        // Now wait for response from server
         boolean interrupted = false;
         PutResponse resp;
         for (; ; ) {
@@ -49,7 +47,6 @@ public class ClientHandler extends SimpleChannelInboundHandler<Object> {
         GetRequest req = GetRequest.builder()
                 .key(key)
                 .build();
-        // Send GET request
         channel.writeAndFlush(req);
         boolean interrupted = false;
         GetResponse resp;

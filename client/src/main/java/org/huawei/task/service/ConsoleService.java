@@ -1,6 +1,5 @@
 package org.huawei.task.service;
 
-import io.netty.channel.ChannelOutboundInvoker;
 import lombok.RequiredArgsConstructor;
 import org.huawei.task.dto.KeyValue;
 import org.huawei.task.enums.Command;
@@ -15,7 +14,7 @@ import static org.huawei.task.enums.Command.SHUTDOWN;
 @RequiredArgsConstructor
 public class ConsoleService {
 
-    private final ClientHandlerFactory handlerFactory;
+    private final ClientAppHelper clientAppHelper;
 
     public void runConsole() {
         var run = true;
@@ -31,7 +30,7 @@ public class ConsoleService {
                     switch (command) {
                         case GET: {
                             var key = Integer.parseInt(argument);
-                            var response = handlerFactory.getHandler(key).getValueFromServer(key);
+                            var response = clientAppHelper.getHandler(key).getValueFromServer(key);
                             if (response.isPresent())
                                 System.out.println(response.getValue());
                             else
@@ -42,8 +41,13 @@ public class ConsoleService {
                             var kvString = argument.split(":");
                             if (kvString.length == 2) {
                                 KeyValue kv = new KeyValue(Integer.parseInt(kvString[0]), kvString[1]);
-                                System.out.println(PUT_SUCCESS +
-                                        handlerFactory.getHandler(kv.getKey()).putValueToMap(kv));
+                                var putResult = clientAppHelper.getHandler(kv.getKey()).putValueToMap(kv);
+                                String msg;
+                                if (putResult.getSaved())
+                                    msg = PUT_SUCCESS + putResult;
+                                else
+                                    msg = PUT_ERROR + putResult;
+                                System.out.println(msg);
                             } else
                                 throw new IllegalArgumentException(ERR_TEXT);
                             break;
@@ -56,9 +60,9 @@ public class ConsoleService {
                     // Avoiding existing another one-word command
                     if (byeCommand == SHUTDOWN || byeCommand == QUIT) {
                         if (byeCommand == SHUTDOWN)
-                            handlerFactory.getHandlers().parallelStream().forEach(ClientHandler::shutdown);
+                            clientAppHelper.getHandlers().parallelStream().forEach(ClientHandler::shutdown);
                         if (byeCommand == QUIT)
-                            handlerFactory.setQuitInvoked(true);
+                            clientAppHelper.setQuitInvoked(true);
                         run = false;
                     } else
                         throw new IllegalArgumentException();

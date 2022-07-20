@@ -18,6 +18,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     private final ConcurrentHashMap<Integer, String> keyValueMap;
     private static final ChannelGroup group = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    // Netty logger was used
     private static final InternalLogger logger = InternalLoggerFactory.getInstance(ServerHandler.class);
 
     @Override

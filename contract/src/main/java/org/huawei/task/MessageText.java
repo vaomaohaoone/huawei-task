@@ -5,4 +5,5 @@ public class MessageText {
     public static final String BYE_TEXT = "BYE";
     public static final String ERR_TEXT = "ERR";
     public static final String PUT_SUCCESS = "PUT SUCCESS: ";
+    public static final String PUT_ERROR = "PUT ERROR: ";
 }

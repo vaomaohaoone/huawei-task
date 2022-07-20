@@ -1,6 +1,6 @@
 ## Distributed storage of map objects  
 ### Requirements: 
-1) java with version 8+ 
+1) java with version 10+ 
 2) maven 
 3) docker 
 ### Build (check .sh scripts are executable before) 

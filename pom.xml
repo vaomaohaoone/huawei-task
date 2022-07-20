@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.huawei.task</groupId>
+    <artifactId>huawei-task</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <netty.version>4.1.79.Final</netty.version>
+        <lombok.version>1.18.22</lombok.version>
+        <maven.jar.plugin.version>3.2.2</maven.jar.plugin.version>
+    </properties>
+
+    <modules>
+        <module>client</module>
+        <module>server</module>
+        <module>contract</module>
+    </modules>
+
+</project>

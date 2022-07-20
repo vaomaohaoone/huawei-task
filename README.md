@@ -9,7 +9,7 @@
 ./run_server.sh {count_of_workers} {initial_port}  
 example: ./run_server.sh 2 8463 
 ### Run client 
-./run_client.sh {list of ports, separated by "|"} 
+./run_client.sh {list of ports, separated by "|"}  
 example: ./run_client.sh "8463|8464" 
 #### Links 
 https://www.baeldung.com/netty  
